@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Worksheets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+
+<ul>
+<% @uploads.each do |file| %>
+  <li>
+    <%=link_to file.worksheet.name, file.worksheet %> - 
+    <%= link_to file.image_file_name, file.image.url, html_options = {download: ''} %>
+  </li>
+<% end %>
+</ul>
+
+
+  <tbody>
+    <% @worksheets.each do |worksheet| %>
+      <tr>
+        <td><%= link_to 'Show', worksheet %></td>
+        <td><%= link_to 'Edit', edit_worksheet_path(worksheet) %></td>
+        <td><%= link_to 'Destroy', worksheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Worksheet', new_worksheet_path %>

@@ -1,0 +1,33 @@
+<%= form_for(worksheet) do |f| %>
+  <% if worksheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(worksheet.errors.count, "error") %> prohibited this worksheet from being saved:</h2>
+
+      <ul>
+      <% worksheet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Form for -->
+  
+<%= form_for @worksheet, :html => { :multipart => true } do |f| %>
+  <h3>Upload launch files</h3>
+  <div id="attached_assets"> 
+    <%= f.fields_for :photos, Photo.new do |image| %>
+      <%= render 'photo_fields', :f => image %>
+      <div class="links">
+        <%= link_to_add_association 'Add Another File', f, :photos %>
+      </div>
+    <% end %>
+  </div>
+  <%= f.submit 'Upload Files'%>
+<% end %>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
